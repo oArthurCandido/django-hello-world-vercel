@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title %}Todo List{% endblock %} 
+
+
+{% block content %}
+<h1>Todo List</h1>
+<p>Welcome to the Todo List page!</p>
+<form class='form-group ' action="{% url 'salvar' %}" method="POST">
+  {% csrf_token %}
+  <input type="text" name="title" placeholder="Enter a new todo" />
+  <input type="checkbox" name="completed" />
+  <label for="completed" class="form-check-label">Completed</label>
+  <button type="submit" class="btn-btn-dark">Add</button>
+</form>
+<ul>
+  {% for todo in todos %}
+  <li>
+    {{ todo.title }}: {% if todo.completed %}Completed{% else %}Not completed 
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
